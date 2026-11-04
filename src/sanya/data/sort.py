@@ -15,8 +15,6 @@ def _fill_alphabet_with_words(
 ) -> dict[str, list[str]]:
     with Path(_DICTIONARY_PATH).open(encoding='utf-8') as wrong_words:
         for word in wrong_words:
-            if "#" in word:
-                continue
             clean_word = word.strip('\n')
             first_letter = clean_word[0]
             alphabet_words[first_letter].append(clean_word)
