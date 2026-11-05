@@ -9,7 +9,7 @@ format: ## Format code with ruff
 lint: ## Run linting checks (ruff, flake8, mypy)
 	$(POETRY) run ruff check --exit-non-zero-on-fix
 	$(POETRY) run ruff format --check --diff
-	$(POETRY) run flake8 .
+	$(POETRY) run flake8 src/sanya
 
 .PHONY: type-check
 type-check: ## Run type checking (mypy)
