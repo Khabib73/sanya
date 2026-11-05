@@ -5,35 +5,35 @@ _DICTIONARY_PATH: Final = Path(__file__).parent / 'dictionary_ru.txt'
 
 _RUSSIAN_ALPHABET: Final = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
 
+type WordsByLetter = dict[str, list[str]]
 
-def _create_alphabet() -> dict[str, list[str]]:
+
+def _create_alphabet() -> WordsByLetter:
     return {letter: [] for letter in _RUSSIAN_ALPHABET}
 
 
-def _fill_alphabet_with_words(
-    alphabet_words: dict[str, list[str]],
-) -> dict[str, list[str]]:
+def _fill_alphabet_with_words(words_by_letter: WordsByLetter) -> WordsByLetter:
     with Path(_DICTIONARY_PATH).open(encoding='utf-8') as wrong_words:
         for word in wrong_words:
             clean_word = word.strip('\n')
             first_letter = clean_word[0]
-            alphabet_words[first_letter].append(clean_word)
-    return alphabet_words
+            words_by_letter[first_letter].append(clean_word)
+    return words_by_letter
 
 
-def _sort_words(alphabet_words: dict[str, list[str]]) -> dict[str, list[str]]:
+def _sort_words(words_by_letter: WordsByLetter) -> WordsByLetter:
     sorted_alphabet_words = {}
 
-    for letter, words in alphabet_words.items():
+    for letter, words in words_by_letter.items():
         sorted_alphabet_words[letter] = sorted(words)
 
     return sorted_alphabet_words
 
 
-def _rewrite_words(sorted_words: dict[str, list[str]]) -> None:
+def _rewrite_words(words_by_letter: WordsByLetter) -> None:
     with Path(_DICTIONARY_PATH).open('w', encoding='utf-8') as clean_file:
         clean_file.writelines(
-            f'{word}\n' for words in sorted_words.values() for word in words
+            f'{word}\n' for words in words_by_letter.values() for word in words
         )
 
 
