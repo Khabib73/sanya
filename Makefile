@@ -19,5 +19,9 @@ type-check: ## Run type checking (mypy)
 unit: ## Run unit tests with pytest
 	$(POETRY) run pytest
 
+.PHONY: sort
+sort:
+	$(POETRY) run python3 src/sanya/data/sort.py
+
 .PHONY: test
 test: lint type-check unit ## Run all checks (lint, unit, package)
