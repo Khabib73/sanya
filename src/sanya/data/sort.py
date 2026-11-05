@@ -37,7 +37,7 @@ def _rewrite_words(sorted_words: dict[str, list[str]]) -> None:
         )
 
 
-def _main():
+def _main() -> None:
     _rewrite_words(_sort_words(_fill_alphabet_with_words(_create_alphabet())))
 
 
